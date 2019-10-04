@@ -27,7 +27,9 @@ class ControllerPlace extends Controller
      */
     public function create()
     {
-        //
+      $titolo = "Place";
+
+      return view('createPlace', compact('titolo'));
     }
 
     /**
@@ -38,7 +40,15 @@ class ControllerPlace extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $datiVerificati = $request -> validate([
+        'name' => 'required',
+        'address' => 'required',
+        'city' => 'required',
+        'nation' => 'required'
+      ]);
+      $place = Place::create($datiVerificati);
+
+      return redirect('/indexPlace');
     }
 
     /**
@@ -60,7 +70,15 @@ class ControllerPlace extends Controller
      */
     public function edit($id)
     {
-        //
+      // $place = Place::findOrFail($id);
+      // $titolo = "Place";
+      //
+      // return view('editPlace', compact('place', 'titolo'));
+      $place = Place::findOrFail($id);
+      $titolo = "Place";
+
+      return view('editPlace', compact('place', 'titolo'));
+
     }
 
     /**
@@ -72,7 +90,15 @@ class ControllerPlace extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $datiVerificati = $request -> validate([
+        'name' => 'required',
+        'address' => 'required',
+        'city' => 'required',
+        'nation' => 'required'
+      ]);
+      Place::whereId($id) -> update($datiVerificati);
+
+      return redirect('/indexPlace');
     }
 
     /**
@@ -83,6 +109,9 @@ class ControllerPlace extends Controller
      */
     public function destroy($id)
     {
-        //
+      $place = Place::findOrFail($id);
+      $place -> delete();
+
+      return redirect('/indexPlace');
     }
 }

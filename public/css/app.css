@@ -34,3 +34,18 @@ main {
   justify-content: space-around;
 }
 
+a {
+  margin: 5px;
+  padding: 5px;
+  border: solid 2px red;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+}
+
+label,
+input {
+  margin: 10px 0;
+}
+
